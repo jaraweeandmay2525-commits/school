@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#7657e8">
+<title>My School Adventure | เกมภาษาอังกฤษ</title>
+<style>
+:root{--purple:#7657e8;--pink:#ff6592;--ink:#26334a;--muted:#66758a;--paper:#fff;--line:#e8e9f2;--mint:#d9ffeb;--sky:#c9f1ff}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Thai",sans-serif;color:var(--ink);background:linear-gradient(135deg,#fff2a8,#c7f5ff 50%,#ffd6eb);min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #7657e8;outline-offset:2px}
+.wrap{max-width:980px;margin:auto;padding:14px}.top{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#ffffffed;border-radius:20px;padding:12px 16px;box-shadow:0 6px 20px #33415518;position:sticky;top:8px;z-index:4}
+.brand{font-weight:1000;color:var(--purple)}.stats{display:flex;gap:7px;flex-wrap:wrap}.pill{background:#f2efff;padding:6px 10px;border-radius:99px;font-weight:800;font-size:14px}
+.panel{background:var(--paper);border-radius:26px;padding:clamp(16px,4vw,25px);margin-top:14px;box-shadow:0 8px 24px #33415514}.hero{text-align:center}.hero .emoji{font-size:clamp(45px,10vw,76px)}h1{font-size:clamp(30px,7vw,52px);line-height:1.1;color:var(--purple);margin:8px 0}h2{color:var(--purple);margin:0 0 12px}p{line-height:1.55}.muted{color:var(--muted);font-size:14px}
+.field{display:block;font-weight:800;margin:12px 0 6px}input,select{width:100%;padding:13px;border:2px solid var(--line);border-radius:14px;background:#fff;color:var(--ink)}
+.btn{border:0;border-radius:15px;padding:12px 17px;font-weight:900;background:#f0edff;color:#4936a0}.btn.primary{background:linear-gradient(90deg,var(--pink),var(--purple));color:white}.btn:disabled{opacity:.45;cursor:not-allowed}
+.nav{display:flex;gap:7px;overflow-x:auto;margin-top:18px;padding:2px}.nav .btn{white-space:nowrap;flex-shrink:0}.nav .active{background:var(--purple);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px}.tile{border:2px solid #eeeaff;border-radius:18px;background:#f9f8ff;padding:13px;text-align:center;font-weight:900;color:var(--ink);min-height:100px}.tile .ico{display:block;font-size:37px;margin-bottom:4px}.tile small{display:block;color:var(--muted);font-weight:600}
+.scene{height:245px;position:relative;overflow:hidden;border-radius:20px;background:linear-gradient(#bdeeff 0 58%,#a3dfa0 58%);color:#27444b}
+.sun{position:absolute;top:10px;left:15px;font-size:27px}.cloud{position:absolute;right:15px;top:12px;font-size:28px}
+.house{position:absolute;bottom:66px;transform:translateX(-50%);text-align:center;font-size:34px;z-index:1}.house small{display:block;font-size:11px;font-weight:900}
+.path{position:absolute;bottom:0;left:0;right:0;height:56px;background:#ead5a1;border-top:5px solid #c5ad7a}
+.walker{position:absolute;z-index:2;bottom:4px;left:5%;font-size:39px;transition:left .35s}
+.dialog{background:#f8f7ff;border:2px solid #ece8ff;border-radius:18px;padding:15px}.english{font-size:clamp(19px,4vw,25px);font-weight:1000}.feedback{min-height:24px;font-weight:800;margin-top:8px}
+.progress{height:11px;background:#eee;border-radius:99px;overflow:hidden}.progress>div{height:100%;width:0;background:linear-gradient(90deg,#42c9a5,#4d9dff)}
+.hidden{display:none!important}.certificate{border:8px double var(--purple);background:#fffdf0;border-radius:20px;text-align:center;padding:22px}
+@media(max-width:520px){.wrap{padding:8px}.top{padding:10px}.brand{font-size:13px}.pill{font-size:12px}.scene{height:220px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){.walker{transition:none}}
+@media print{body{background:white}.top,.nav,.no-print,#login{display:none!important}.panel{box-shadow:none}.certificate{margin:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand">🎒 My School Adventure</div><div class="stats"><span class="pill">👤 <span id="who">นักเรียน</span></span><span class="pill">⭐ <span id="stars">0</span></span><span class="pill">🏅 <span id="points">0</span></span></div></header>
+
+<section id="login" class="panel hero">
+<div class="emoji">🌈🎒🏫</div><h1>My School<br>Adventure!</h1>
+<p>เกมภาษาอังกฤษแสนสนุกสำหรับนักเรียน ป.1–ป.6<br>เดินสำรวจโรงเรียน ฟังภาษาอังกฤษ และสะสมดาว</p>
+<label class="field" for="studentName">ชื่อเล่นนักเรียน</label><input id="studentName" maxlength="30" placeholder="เช่น น้องฟ้า" autocomplete="off">
+<label class="field" for="studentGrade">ระดับชั้น</label><select id="studentGrade"><option>ป.1</option><option>ป.2</option><option>ป.3</option><option>ป.4</option><option>ป.5</option><option>ป.6</option></select>
+<div class="field">เลือกตัวละคร</div><div id="avatars" class="flex" style="display:flex;justify-content:center;gap:7px;flex-wrap:wrap"></div>
+<button id="start" class="btn primary" style="width:100%;margin-top:14px;font-size:19px">🚀 เริ่มผจญภัย</button>
+<p class="muted">เสียงอ่านภาษาอังกฤษอาจขึ้นกับเสียงที่อุปกรณ์และเบราว์เซอร์รองรับ</p>
+</section>
+
+<main id="game" class="hidden">
+<section class="panel hero"><h2 id="greeting">Hello!</h2><div class="muted">เลือกกิจกรรมที่อยากเล่นได้เลย</div>
+<nav class="nav" aria-label="กิจกรรม">
+<button class="btn active" data-tab="explore">🗺️ สำรวจ</button><button class="btn" data-tab="quiz">🎯 ควิซ</button><button class="btn" data-tab="match">🧩 จับคู่</button><button class="btn" data-tab="listen">🔊 ฟัง</button><button class="btn" data-tab="words">📚 คำศัพท์</button><button class="btn" data-tab="award">🏆 รางวัล</button>
+</nav></section>
+
+<section id="explore" class="panel activity">
+<div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><h2>🗺️ Walk & Talk</h2><span class="muted" id="stopCount">1/8</span></div>
+<div class="scene" role="img" aria-label="ฉากโรงเรียนมีอาคารเรียนและสถานที่ต่าง ๆ"><span class="sun">☀️</span><span class="cloud">☁️</span>
+<div class="house" style="left:8%">🏫<small>School</small></div><div class="house" style="left:27%">📚<small>Library</small></div><div class="house" style="left:46%">🍱<small>Canteen</small></div><div class="house" style="left:65%">⚽<small>Playground</small></div><div class="house" style="left:84%">🔬<small>Science</small></div><div class="path"></div><div id="walker" class="walker">🧑‍🎓</div></div>
+<div class="dialog" style="margin-top:12px" aria-live="polite"><b id="speaker">👩‍🏫 Teacher</b><div id="en" class="english">Welcome to our school!</div><p id="th"></p><div id="extra" class="muted"></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button id="speak" class="btn primary">🔊 ฟังประโยค</button><button id="slow" class="btn">🐢 ฟังช้า ๆ</button></div></div>
+<div style="display:flex;justify-content:space-between;gap:8px;margin-top:12px"><button id="back" class="btn">⬅️ ย้อนกลับ</button><button id="next" class="btn primary">เดินไปต่อ ➡️</button></div><div id="exploreFeedback" class="feedback" aria-live="polite"></div>
+</section>
+
+<section id="quiz" class="panel activity hidden"><h2>🎯 Super Quiz</h2><div class="progress"><div id="qbar"></div></div><p id="qcount" class="muted"></p><div id="question" class="english"></div><div id="answers" style="display:grid;gap:8px;margin-top:12px"></div><div id="qfeedback" class="feedback" aria-live="polite"></div><button id="qnext" class="btn primary hidden">ข้อต่อไป ➡️</button></section>
+
+<section id="match" class="panel activity hidden"><h2>🧩 Word Match</h2><p>เลือกคำภาษาอังกฤษให้ตรงกับความหมายภาษาไทย</p><div id="mprompt" class="english"></div><div id="moptions" style="display:grid;gap:8px;margin-top:12px"></div><div id="mfeedback" class="feedback" aria-live="polite"></div><button id="mnext" class="btn primary hidden">คำต่อไป ➡️</button></section>
+
+<section id="listen" class="panel activity hidden"><h2>🔊 Listening Challenge</h2><p>กดฟัง แล้วเลือกสถานที่ที่ได้ยิน</p><button id="playListen" class="btn primary">🔊 เล่นเสียงภาษาอังกฤษ</button><div id="loptions" class="grid" style="margin-top:12px"></div><div id="lfeedback" class="feedback" aria-live="polite"></div><button id="lnext" class="btn primary hidden">ข้อต่อไป ➡️</button></section>
+
+<section id="words" class="panel activity hidden"><h2>📚 Word Bank</h2><p>แตะบัตรคำเพื่อฟังการออกเสียง</p><div id="wordcards" class="grid"></div></section>
+
+<section id="award" class="panel activity hidden"><div class="certificate"><div style="font-size:58px">🏆🌟</div><h2>Certificate of Achievement</h2><p>มอบให้แก่</p><h1 id="certName"></h1><p id="certGrade"></p><h2>⭐ <span id="certStars">0</span> ดาว</h2><p style="font-size:22px;font-weight:900">คะแนน <span id="certPoints">0</span></p><button id="print" class="btn primary no-print">🖨️ พิมพ์ใบประกาศ</button></div></section>
+</main>
+</div>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const places=[
+['School','โรงเรียน','🏫','👩‍🏫 Teacher','Welcome to our school!','ยินดีต้อนรับสู่โรงเรียนของเรา','We learn and have fun here.'],
+['Classroom','ห้องเรียน','📖','👩‍🏫 Teacher','This is our classroom.','ที่นี่คือห้องเรียนของเรา','We learn English here.'],
+['Library','ห้องสมุด','📚','🧒 Student','This is our library.','ที่นี่คือห้องสมุดของเรา','We read books here.'],
+['Canteen','โรงอาหาร','🍱','👨‍🍳 Staff','This is the canteen.','ที่นี่คือโรงอาหาร','We eat lunch here.'],
+['Playground','สนามเด็กเล่น','⚽','👧 Friend',"Let's play together!",'มาเล่นด้วยกันเถอะ','This is our playground.'],
+['Science room','ห้องวิทยาศาสตร์','🔬','👩‍🔬 Teacher','We do experiments here.','พวกเราทดลองวิทยาศาสตร์ที่นี่','Science is fun!'],
+['Computer room','ห้องคอมพิวเตอร์','💻','🧑‍💻 Student','We use computers here.','พวกเราใช้คอมพิวเตอร์ที่นี่','Let’s learn together.'],
+['Gym','โรงยิม','🏀','🏃 Coach','This is our gym.','ที่นี่คือโรงยิม','We play sports here.']];
+const qs=[
+['Where do you read books?',['Library','Canteen','Gym'],'Library'],
+['Who teaches students?',['Teacher','Student','Librarian'],'Teacher'],
+['Where do you eat lunch?',['Canteen','Library','Classroom'],'Canteen'],
+['Where do you play football?',['Playground','Toilet','Library'],'Playground'],
+['Where do you use computers?',['Computer room','Garden','Canteen'],'Computer room'],
+['นักเรียน ภาษาอังกฤษคืออะไร?',['Student','Teacher','School'],'Student'],
+['ห้องเรียน ภาษาอังกฤษคืออะไร?',['Classroom','Library','Gym'],'Classroom'],
+['I go to ____ every day.',['school','canteen','toilet'],'school'],
+['Where do you do experiments?',['Science room','Library','Playground'],'Science room'],
+['Choose the correct sentence.',['This is my school.','This are my school.','This my school is.'],'This is my school.']];
+const matches=[['โรงเรียน','School'],['ห้องเรียน','Classroom'],['ห้องสมุด','Library'],['โรงอาหาร','Canteen'],['สนามเด็กเล่น','Playground'],['ครู','Teacher'],['นักเรียน','Student'],['โรงยิม','Gym'],['ห้องวิทยาศาสตร์','Science room'],['ห้องคอมพิวเตอร์','Computer room']];
+let name='',grade='',avatar='🧑‍🎓',stars=0,points=0,loc=0,qi=0,mi=0,li=0,locked=false,quizDone=false,matchDone=false,listenDone=false;
+const shuffle=a=>a.slice().sort(()=>Math.random()-.5);
+function update(){$('stars').textContent=stars;$('points').textContent=points;$('certStars').textContent=stars;$('certPoints').textContent=points}
+function speak(text,rate=.85){if(!('speechSynthesis'in window)){alert('อุปกรณ์นี้ไม่รองรับเสียงอ่าน');return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=rate;speechSynthesis.speak(u)}
+function showTab(tab){document.querySelectorAll('.activity').forEach(x=>x.classList.toggle('hidden',x.id!==tab));document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));if(tab==='quiz')renderQuiz();if(tab==='match')renderMatch();if(tab==='listen')renderListen()}
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
+['🧑‍🎓','👩‍🎓','🧒','👧','🐻','🐰','🦊'].forEach((a,i)=>{let b=document.createElement('button');b.className='btn'+(i===0?' primary':'');b.textContent=a;b.setAttribute('aria-pressed',i===0);b.onclick=()=>{avatar=a;Array.from($('avatars').children).forEach(x=>{x.classList.remove('primary');x.setAttribute('aria-pressed','false')});b.classList.add('primary');b.setAttribute('aria-pressed','true')};$('avatars').appendChild(b)});
+$('start').onclick=()=>{name=$('studentName').value.trim();if(!name){$('studentName').focus();$('studentName').setAttribute('aria-invalid','true');return}grade=$('studentGrade').value;$('login').classList.add('hidden');$('game').classList.remove('hidden');$('who').textContent=avatar+' '+name;$('greeting').textContent='Hello, '+name+'!';$('certName').textContent=avatar+' '+name;$('certGrade').textContent='ระดับชั้น '+grade;renderExplore()};
+function renderExplore(){let p=places[loc];$('walker').style.left=(3+loc*13.3)+'%';$('stopCount').textContent=(loc+1)+'/'+places.length;$('speaker').textContent=p[3];$('en').textContent=p[4];$('th').textContent=p[5];$('extra').textContent=p[6];$('back').disabled=loc===0;$('next').textContent=loc===places.length-1?'จบการสำรวจ 🏁':'เดินไปต่อ ➡️';$('exploreFeedback').textContent=''}
+$('speak').onclick=()=>speak(places[loc][4]+' '+places[loc][6]);$('slow').onclick=()=>speak(places[loc][4]+' '+places[loc][6],.6);
+$('back').onclick=()=>{if(loc>0){loc--;renderExplore()}};
+$('next').onclick=()=>{if(loc<places.length-1){loc++;stars++;points+=5;update();renderExplore()}else{$('exploreFeedback').textContent='🎉 สำรวจครบทุกสถานที่แล้ว!';stars++;points+=10;update()}};
+function renderQuiz(){locked=false;quizDone=qi>=qs.length;$('qnext').classList.add('hidden');$('qfeedback').textContent='';if(quizDone){$('qcount').textContent='ครบทุกข้อแล้ว';$('question').textContent='🎉 ยอดเยี่ยม! ทำควิซครบแล้ว';$('answers').innerHTML='';$('qbar').style.width='100%';$('qnext').textContent='🔄 เล่นควิซใหม่';$('qnext').classList.remove('hidden');return}let q=qs[qi];$('qcount').textContent='ข้อ '+(qi+1)+' จาก '+qs.length;$('qbar').style.width=(qi/qs.length*100)+'%';$('question').textContent=q[0];$('answers').innerHTML='';q[1].forEach((a,i)=>{let b=document.createElement('button');b.className='btn';b.style.textAlign='left';b.textContent=String.fromCharCode(65+i)+'. '+a;b.onclick=()=>{if(locked)return;locked=true;let ok=a===q[2];b.classList.add(ok?'correct':'wrong');if(ok){points+=10;stars+=2;$('qfeedback').textContent='✅ ถูกต้อง! +10 คะแนน'}else{$('qfeedback').textContent='คำตอบที่ถูกต้องคือ '+q[2]}update();$('qnext').classList.remove('hidden')};$('answers').appendChild(b)})}
+$('qnext').onclick=()=>{if(quizDone)qi=0;else qi++;renderQuiz()};
+function renderMatch(){locked=false;matchDone=mi>=matches.length;$('mnext').classList.add('hidden');$('mfeedback').textContent='';if(matchDone){$('mprompt').textContent='🎉 จับคู่ครบแล้ว!';$('moptions').innerHTML='';$('mnext').textContent='🔄 เล่นใหม่';$('mnext').classList.remove('hidden');return}let item=matches[mi];$('mprompt').textContent='คำแปล: '+item[0];$('moptions').innerHTML='';shuffle([item[1],...shuffle(matches.filter(x=>x[1]!==item[1]).map(x=>x[1])).slice(0,3)]).forEach(word=>{let b=document.createElement('button');b.className='btn';b.textContent=word;b.onclick=()=>{if(locked)return;locked=true;if(word===item[1]){b.classList.add('correct');points+=5;stars++;$('mfeedback').textContent='🌟 ถูกต้อง! +5 คะแนน'}else{$('mfeedback').textContent='คำตอบคือ '+item[1]}update();$('mnext').classList.remove('hidden')};$('moptions').appendChild(b)})}
+$('mnext').onclick=()=>{if(matchDone)mi=0;else mi++;renderMatch()};
+function renderListen(){locked=false;listenDone=li>=places.length;$('lnext').classList.add('hidden');$('lfeedback').textContent='';if(listenDone){$('lfeedback').textContent='🎉 ผ่านภารกิจฟังครบแล้ว!';$('loptions').innerHTML='';$('lnext').textContent='🔄 เล่นใหม่';$('lnext').classList.remove('hidden');return}let p=places[li];$('loptions').innerHTML='';shuffle(places).forEach(x=>{let b=document.createElement('button');b.className='tile';b.innerHTML='<span class="ico">'+x[2]+'</span>'+x[0];b.onclick=()=>{if(locked)return;locked=true;if(x[0]===p[0]){b.classList.add('correct');points+=10;stars+=2;$('lfeedback').textContent='✅ Correct! +10 คะแนน'}else{$('lfeedback').textContent='คำตอบคือ '+p[0]}update();$('lnext').classList.remove('hidden')};$('loptions').appendChild(b)})}
+$('playListen').onclick=()=>speak(places[li%places.length][0],.75);
+$('lnext').onclick=()=>{if(listenDone)li=0;else li++;renderListen()};
+places.forEach(p=>{let b=document.createElement('button');b.className='tile';b.innerHTML='<span class="ico">'+p[2]+'</span>'+p[0]+'<small>'+p[1]+'</small>';b.onclick=()=>speak(p[0],.75);$('wordcards').appendChild(b)});
+$('print').onclick=()=>window.print();update();renderExplore();
+})();
+</script>
+</body>
+</html>
